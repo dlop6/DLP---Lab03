@@ -1,2 +1,3 @@
 .claude/
 docs/temp/
+.pytest_cache/
