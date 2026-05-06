@@ -1,0 +1,47 @@
+Salida ejemplo - gramatica 1
+
+==== Gramatica ====
+E -> T E'
+E' -> + T E' | epsilon
+T -> F T'
+T' -> * F T' | epsilon
+F -> ( E ) | id
+
+Simbolo inicial: E
+No terminales: { E, E', T, T', F }
+Terminales: { (, ), *, +, id }
+
+Primero:
+  FIRST(E) = { (, id }
+  FIRST(E') = { +, epsilon }
+  FIRST(T) = { (, id }
+  FIRST(T') = { *, epsilon }
+  FIRST(F) = { (, id }
+
+Siguiente:
+  FOLLOW(E) = { ), $ }
+  FOLLOW(E') = { ), $ }
+  FOLLOW(T) = { ), +, $ }
+  FOLLOW(T') = { ), +, $ }
+  FOLLOW(F) = { ), *, +, $ }
+
+Salida ejemplo - gramatica 2
+
+==== Gramatica ====
+S -> a B | b A
+A -> a | a S | b A A
+B -> b | b S | a B B
+
+Simbolo inicial: S
+No terminales: { S, A, B }
+Terminales: { a, b }
+
+Primero:
+  FIRST(S) = { a, b }
+  FIRST(A) = { a, b }
+  FIRST(B) = { a, b }
+
+Siguiente:
+  FOLLOW(S) = { a, b, $ }
+  FOLLOW(A) = { a, b, $ }
+  FOLLOW(B) = { a, b, $ }

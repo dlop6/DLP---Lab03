@@ -1,52 +1,38 @@
-# Lab 03 — Conjuntos Primero y Siguiente
+# Lab 03 — Primero y Siguiente
 
-Laboratorio de gramáticas libres de contexto: cálculo de **Primero** (`FIRST`) y **Siguiente** (`FOLLOW`) sobre la estructura `Gramatica` definida en `src/contract.py` (no terminales como llaves, producciones como listas de símbolos, `ε` como cadena literal).
+Integrantes: Diego Lopez #23747, Jennifer Toxcon #21276, Roberto Barreda #23354
 
-## Estructura
+Objetivo: calcular los conjuntos Primero y Siguiente para una gramatica libre de contexto.
+El programa permite ingresar la gramatica, identificar terminales y no terminales, y mostrar resultados claros.
+No se usan librerias externas para Primero o Siguiente.
 
-| Ruta | Rol |
-|------|-----|
-| `src/contract.py` | Tipo `Gramatica`, `EPSILON`, utilidades (`get_no_terminales`, `get_terminales`). |
-| `src/primero.py` | `calcular_primero` y `_primero_secuencia` (Primero de una secuencia; lo reutiliza Siguiente). |
-| `src/siguiente.py` | `calcular_siguiente`. |
-| `tests/test_primero.py` | Pruebas de Primero con las dos gramáticas finales. |
-| `tests/test_siguiente.py` | Pruebas de Siguiente con las mismas gramáticas. |
-
-## Cómo correr las pruebas
-
-Desde la raíz del repo (con `pytest` instalado):
+## Uso rapido
 
 ```bash
-pytest tests/ -v
+python src/main.py
 ```
 
-## Funcionamiento de Siguiente
+Gramaticas de prueba o desde archivo:
 
-`calcular_siguiente(gramatica, simbolo_inicial=None)` devuelve un `dict` por no terminal. Si no indicas `simbolo_inicial`, se toma el **primer** no terminal del diccionario (orden de inserción); en las pruebas se pasa explícitamente `"E"` o `"S"`.
+```bash
+python src/main.py --demo 1
+python src/main.py --demo 2
+python src/main.py --archivo docs/gramatica_1.txt
+```
 
-Reglas implementadas:
+## Formato de entrada
 
-1. **Símbolo inicial:** se agrega `$` al Siguiente del no terminal inicial.
-2. **Forma general** `A → α B β` con `B` no terminal: al Siguiente de `B` se agrega **Primero(β)** sin `ε` (cubre β empezando en **terminal** u otro **no terminal** vía los conjuntos Primero).
-3. **β vacío o Primero(β) contiene ε** (por ejemplo `B` al final de la producción, o β que puede anularse): al Siguiente de `B` se agrega **Siguiente(A)**.
-4. El cálculo es por **punto fijo** hasta que no haya cambios, recorriendo todas las producciones y todas las posiciones de cada no terminal.
+- Una produccion por linea: A -> alpha | beta
+- Usa espacios entre simbolos.
+- Para vacio, usa epsilon o eps.
+- Una linea vacia termina el ingreso.
 
-En resumen, Siguiente se apoya en **Primero** (incluido `_primero_secuencia` para el sufijo β) más la propagación desde la cabeza `A` cuando hace falta.
+## Gramaticas y salida
 
-## Resultados de Siguiente (dos gramáticas finales)
+- [docs/gramatica_1.txt](docs/gramatica_1.txt)
+- [docs/gramatica_2.txt](docs/gramatica_2.txt)
+- [docs/salida_ejemplo.txt](docs/salida_ejemplo.txt)
 
-**Gramática 1** (expresiones con `E`, `E'`, `T`, `T'`, `F`; axioma `E`):
+## Video
 
-| No terminal | Siguiente |
-|---------------|-----------|
-| `E`, `E'` | `$`, `)` |
-| `T`, `T'` | `$`, `)`, `+` |
-| `F` | `$`, `)`, `*`, `+` |
-
-**Gramática 2** (`S → aB | bA`, `A` y `B` con recursión; axioma `S`):
-
-| No terminal | Siguiente |
-|---------------|-----------|
-| `S`, `A`, `B` | `$`, `a`, `b` |
-
-Los valores anteriores coinciden con las aserciones en `tests/test_siguiente.py`.
+Link: (pendiente)
