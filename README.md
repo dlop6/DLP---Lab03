@@ -2,10 +2,6 @@
 
 Integrantes: Diego Lopez #23747, Jennifer Toxcon #21276, Roberto Barreda #23354
 
-Objetivo: calcular los conjuntos Primero y Siguiente para una gramatica libre de contexto.
-El programa permite ingresar la gramatica, identificar terminales y no terminales, y mostrar resultados claros.
-No se usan librerias externas para Primero o Siguiente.
-
 ## Uso rapido
 
 ```bash
@@ -35,4 +31,4 @@ python src/main.py --archivo docs/gramatica_1.txt
 
 ## Video
 
-Link: (pendiente)
+Link: https://youtu.be/n3XbCrHpFVk
